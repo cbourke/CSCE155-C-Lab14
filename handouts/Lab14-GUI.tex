@@ -1,0 +1,242 @@
+\documentclass[12pt]{scrartcl}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.25cm}
+
+\usepackage{graphicx}
+
+\usepackage{xcolor}
+
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\usepackage{hyperref}
+\hypersetup{
+  letterpaper,
+  colorlinks,
+  linkcolor=red,
+  citecolor=darkgreen,
+  menucolor=darkred,
+  urlcolor=blue,
+  pdfpagemode=none,
+  pdftitle={Introduction To Git},
+  pdfauthor={Christopher M. Bourke},
+  pdfcreator={$ $Id: cv-us.tex,v 1.28 2009/01/01 00:00:00 cbourke Exp $ $},
+  pdfsubject={PhD Thesis},
+  pdfkeywords={}
+}
+
+\definecolor{MyDarkBlue}{rgb}{0,0.08,0.45}
+\definecolor{MyDarkRed}{rgb}{0.45,0.08,0}
+\definecolor{MyDarkGreen}{rgb}{0.08,0.45,0.08}
+
+\definecolor{mintedBackground}{rgb}{0.95,0.95,0.95}
+\definecolor{mintedInlineBackground}{rgb}{.90,.90,1}
+
+%\usepackage{newfloat}
+\usepackage[newfloat=true]{minted}
+\setminted{mathescape,
+               linenos,
+               autogobble,
+               frame=none,
+               framesep=2mm,
+               framerule=0.4pt,
+               %label=foo,
+               xleftmargin=2em,
+               xrightmargin=0em,
+               startinline=true,  %PHP only, allow it to omit the PHP Tags *** with this option, variables using dollar sign in comments are treated as latex math
+               numbersep=10pt, %gap between line numbers and start of line
+               style=default, %syntax highlighting style, default is "default"
+               			    %gallery: http://help.farbox.com/pygments.html
+			    	    %list available: pygmentize -L styles
+               bgcolor=mintedBackground} %prevents breaking across pages
+               
+\setmintedinline{bgcolor={mintedBackground}}
+\setminted[text]{bgcolor={mintedBackground},linenos=false,autogobble,xleftmargin=1em}
+%\setminted[php]{bgcolor=mintedBackgroundPHP} %startinline=True}
+\SetupFloatingEnvironment{listing}{name=Code Sample}
+\SetupFloatingEnvironment{listing}{listname=List of Code Samples}
+
+
+\title{CSCE 155 - C}
+\subtitle{Lab 14 - Graphical User Interface Programming}
+\author{Dr.\ Chris Bourke}
+\date{~}
+
+\begin{document}
+
+\maketitle
+
+\section*{Prior to Lab}
+
+Before attending this lab:
+\begin{enumerate}
+  \item Read and familiarize yourself with this handout.
+\end{enumerate}
+
+Some additional resources that may help with this lab:
+\begin{itemize}
+  \item GTK tutorial: \url{http://developer.gnome.org/gtk-tutorial/stable/}
+  \item Another GTK Tutorial: \\
+  \url{http://www.yolinux.com/TUTORIALS/GTK+ProgrammingTips.html#BASICCONFIGURATION}
+  \item GTK API: \url{http://developer.gnome.org/gtk/2.24/}
+  \item Possible solution for compiling, running on Windows: \\
+  \url{http://stackoverflow.com/questions/1450445/}
+\end{itemize}
+
+\section*{Peer Programming Pair-Up}
+
+To encourage collaboration and a team environment, labs will be
+structured in a \emph{pair programming} setup.  At the start of
+each lab, you will be randomly paired up with another student 
+(conflicts such as absences will be dealt with by the lab instructor).
+One of you will be designated the \emph{driver} and the other
+the \emph{navigator}.  
+
+The navigator will be responsible for reading the instructions and
+telling the driver what to do next.  The driver will be in charge of the
+keyboard and workstation.  Both driver and navigator are responsible
+for suggesting fixes and solutions together.  Neither the navigator
+nor the driver is ``in charge.''  Beyond your immediate pairing, you
+are encouraged to help and interact and with other pairs in the lab.
+
+Each week you should alternate: if you were a driver last week, 
+be a navigator next, etc.  Resolve any issues (you were both drivers
+last week) within your pair.  Ask the lab instructor to resolve issues
+only when you cannot come to a consensus.  
+
+Because of the peer programming setup of labs, it is absolutely 
+essential that you complete any pre-lab activities and familiarize
+yourself with the handouts prior to coming to lab.  Failure to do
+so will negatively impact your ability to collaborate and work with 
+others which may mean that you will not be able to complete the
+lab.  
+
+\section{Lab Objectives \& Topics}
+At the end of this lab you should be familiar with the following
+\begin{itemize}
+  \item Graphical User Interface and Event-based Programming in C using GTK
+  \item Compiling and running a GUI program
+\end{itemize}
+
+\section{Background}
+
+Many programs interact with users using a Graphical User 
+Interface (GUI).  Traditional GUI design involves the creation 
+and interaction of widgets: general graphical elements that 
+include labels, text boxes, buttons, etc.  Most GUI programming 
+is done using an Application Programmer Interface (API) 
+which is a library or framework that provides a lot of the core 
+functionality including:
+\begin{itemize}
+  \item A window manager that handles the interaction of widgets
+  \item A windowing system that works with the underlying operating 
+  	system and hardware to render the graphics
+  \item Factory functions that can be used to construct and configure widgets
+\end{itemize}
+The particular API that we will work with is GTK (GNU Tool Kit) which 
+is written in C and has support for linux and windows systems.  
+However, given the configuration issues we will focus on linux.  
+
+For this lab, be sure to login to your CSE account through the linux system in the labs.
+
+\subsection*{A simple GUI program}
+
+We have provided a simple calculator program, (\mintinline{text}{gtk_calculator.c}) 
+that simulates a simple calculator.  Two editable input boxes 
+and one non-editable output box have been implemented 
+along with several buttons to support arithmetic operations 
+(addition, subtraction, multiplication).  The operations work 
+by grabbing the values in the two input boxes, performing 
+the arithmetic operation and placing the result into the output 
+box.
+
+You will extend the functionality of this program by adding 
+another button to support division.  To do this, you will need 
+to add code to create and configure the button, implement 
+its callback function, and demonstrate the running program 
+to your lab instructor.
+
+\section{Activities}
+
+Clone the project code for this lab from GitHub using the following
+URL: \url{https://github.com/cbourke/CSCE155-C-Lab14}.
+
+\subsection{Getting Familiar with Linux, GTK}
+
+For this lab you will need to use the SUSE Linux operating system.  
+All the lab computers are dual-boot.  Follow the instructions to login 
+to the SUSE partition on your computer.
+
+\begin{enumerate}
+  \item Login to your account using Linux
+  \begin{enumerate}
+    \item Press Alt-Control-Delete as if you were going to login.
+    \item Click the ``restart'' red button at the bottom right and 
+    	restart the computer
+    \item When it restarts, an option appears: select openSUSE
+    \item Login with your cse login credentials
+    \item You can open a terminal or multiple terminals (which is very 
+    	much like putty) by clicking the terminal icon at the bottom left
+    \item You can edit your code using the usual utilities or use a 
+    	WISIWYG editor called gvim by entering gvim at the command line; 
+	example: \mintinline{text}{gvim gtk_calculator.c}
+  \end{enumerate}
+  \item Build the application by typing \mintinline{text}{make} and 
+  	run the resulting executable.  Try the program out on several 
+	values to get a feel for how it works.
+  \item Open the source file and look it over to get an idea of its design 
+  	and structure.
+  \item Close the calculator program and answer the questions from 
+  	your worksheet.
+\end{enumerate}
+	
+\subsection{Modifying the Program}
+
+You will now modify this program to support division.
+
+\begin{enumerate}
+  \item Create a new division button:
+  \begin{enumerate}  
+    \item In the \mintinline{c}{main} function, declare a \mintinline{c}{GtkWidget} pointer 
+	for the division button
+    \item Set the pointer to a new button by calling the \mintinline{c}{gtk_button_new_with_label} function
+    \item Make sure that the button is visible by calling the \mintinline{c}{gtk_widget_show} function 
+    \item Add the new button to the layout by using the \mintinline{c}{gtk_box_pack_start} function
+  \end{enumerate}
+  \item Make the new button functional by defining and associating an 
+  	appropriate callback function:
+  \begin{enumerate}
+    \item Create a new function (call it \mintinline{c}{division}; there is 
+    	already a function called \mintinline{c}{div} that you should not 
+	redefine) with the appropriate parameters.  For a function to be 
+	used as a GTK callback, it must have a specific signature (return 
+	type, parameter type and list)
+    \item In this function, compute the division of the two input boxes and 
+    	place the result into the output box.
+    \begin{itemize}
+      \item Utilize the \mintinline{c}{getInput} helper function we have provided
+      \item Text boxes can only handle strings, so you'll need to use \mintinline{c}{sprintf} to convert the numerical result to a string
+      \item Use the \mintinline{c}{gtk_entry_set_text} function to set the text of the output text box
+      \item Use the other methods as examples for how to accomplish all of this
+    \end{itemize}
+    \item Register (bind) your division function to your division button by using the \mintinline{c}{g_signal_connect} function
+  \end{enumerate}
+  \item Compile your program (using \mintinline{text}{make}), run it on several 
+  	values to make sure it works; demonstrate your working version to a lab instructor.
+\end{enumerate}
+
+\section{Advanced Activity (optional)}
+
+Test how your program reacts to certain ``bad'' inputs: if you enter 
+non-numeric characters in the input, or attempt to divide by zero.  
+How might you prevent and/or handle these bad inputs?  One 
+solution is to simply display \textbf{\textcolor{red}{ERROR}} (red, 
+bold) in the output box.  Use the ``Calculator!'' label as a model 
+and read GTK?s API Documentation on styling to understand 
+how text elements are ``decorated''.  Add additional code to 
+check for division by zero and instead of placing an answer in 
+the output box, place \textbf{\textcolor{red}{ERROR}} in red, bold font.
+
+	
+\end{document}
