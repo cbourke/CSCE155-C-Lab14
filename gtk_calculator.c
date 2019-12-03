@@ -1,13 +1,15 @@
-/*
-CSCE 155E - GUI Programming with GTK
-A GTK Tutorial:
-  http://developer.gnome.org/gtk-tutorial/2.90/
-The GTK API:
-  http://developer.gnome.org/gtk/2.24/index.html
-*/
+/**
+ * CSCE 155E - GUI Programming with GTK
+ * 
+ * This program creates a simple calculator GUI program
+ * using GTK.
+ *
+ * Full GTK Documentation (3.0):
+ * https://developer.gnome.org/gtk3/stable
+ */
 
 #include <stdlib.h> 
-/* Introduce types and prototypes of GTK+ for the compiler. */ 
+//include the GTK library:
 #include <gtk/gtk.h>  
 
 /**
@@ -115,9 +117,9 @@ int main(int argc, char** argv) {
   gtk_container_set_border_width(GTK_CONTAINER (window), 10);
   g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
-  col1 = gtk_vbox_new(FALSE, 0);
-  col2 = gtk_vbox_new(FALSE, 0);
-  hbox = gtk_hbox_new(FALSE, 0);
+  col1 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+  col2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+  hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
 
   //add the single horizontal box to the main window
   gtk_container_add(GTK_CONTAINER(window), hbox);
